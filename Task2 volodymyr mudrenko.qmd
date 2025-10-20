@@ -1,0 +1,85 @@
+---
+title: "Task 2 – Subsetting & Missing Data"
+author: "Volodymyr Mudrenko"
+format: html
+---
+
+```{r}
+# Using data from the fictional planet Aurelia
+cities_df <- data.frame(
+  City = c("Aqua", "Lumin", "Orion", "Zephyr", "Terra"),
+  Population = c(120, 90, 300, 50, 200),
+  Coastal = c(TRUE, FALSE, TRUE, FALSE, TRUE),
+  Category = c("large", "medium", "mega", "small", "large")
+)
+```
+
+## 2.1 Querying Vectors
+
+```{r}
+seq_vector <- seq(10, 100, by = 5)
+logic_vector <- sample(c(TRUE, FALSE), 10, replace = TRUE)
+
+seq_vector[3]
+seq_vector[2:5]
+seq_vector[seq_vector > 30]
+
+logic_vector[logic_vector]
+which(logic_vector)
+```
+
+## 2.2 Querying List
+
+```{r}
+planet_matrix <- matrix(sample(-50:50, 9), nrow = 3, ncol = 3)
+rownames(planet_matrix) <- c("CityA", "CityB", "CityC")
+colnames(planet_matrix) <- c("Temp", "Energy", "Growth")
+
+planet_list <- list(
+  population = 8.7,
+  matrix = planet_matrix,
+  vectors = list(seq_vector, logic_vector),
+  description = "Aurelia — a water-rich planet with diverse environments."
+)
+
+planet_list$description
+planet_list$matrix
+planet_list$vectors[[1]][2]
+```
+
+## 2.3 Investigating Data Frame
+
+```{r}
+head(cities_df, 3)
+cities_df[4, 1]
+cities_df$Coastal
+
+df_subset <- cities_df[cities_df$Population > 100, ]
+df_subset_2 <- cities_df[cities_df$Category %in% c("large", "mega"), ]
+df_subset
+df_subset_2
+```
+
+## 2.4 Handling Missing Data
+
+```{r}
+df_corrupted <- cities_df
+df_corrupted[2, 3] <- NA
+df_corrupted[4, 2] <- NA
+df_corrupted[5, 4] <- NA
+
+sum(is.na(df_corrupted))
+colSums(is.na(df_corrupted))
+
+mean(df_corrupted$Population, na.rm = TRUE)
+
+df_clean <- na.omit(df_corrupted)
+df_clean
+```
+
+## 2.5 Bonus Challenge
+
+```{r}
+highest_pop_index <- which.max(cities_df$Population)
+cities_df[highest_pop_index, ]
+```
