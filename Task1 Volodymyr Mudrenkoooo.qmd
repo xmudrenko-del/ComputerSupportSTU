@@ -1,0 +1,103 @@
+---
+title: "Task 1 – Exploring Data Types in R"
+author: "Volodymyr Mudrenko"
+format: html
+---
+
+```{r}
+# Theme: Planet Aurelia
+```
+
+## 1.1 Atomic Types
+
+```{r}
+# Numeric values
+population <- 8.7
+temperature <- 23.5
+size_km <- 14500
+rating <- 9.8
+
+# Integer values
+num_moons <- 3L
+num_cities <- 25L
+num_species <- 350L
+
+# Logical values
+has_water <- TRUE
+is_inhabited <- TRUE
+
+# Character values
+planet_name <- "Aurelia"
+region <- "Andromeda"
+category <- "Terrestrial"
+
+cat(planet_name, "is a", category, "planet in", region,
+    "with population", population, "billion and temperature", temperature, "°C.\n")
+```
+
+## 1.2 Vectors
+
+```{r}
+num_vector <- c(population, temperature, size_km, rating, num_moons, num_cities, num_species)
+seq_vector <- seq(10, 100, by = 5)
+logic_vector <- sample(c(TRUE, FALSE), 10, replace = TRUE)
+
+num_vector
+seq_vector
+logic_vector
+```
+
+## 1.3 Matrix
+
+```{r}
+planet_matrix <- matrix(sample(-50:50, 9), nrow = 3, ncol = 3)
+rownames(planet_matrix) <- c("CityA", "CityB", "CityC")
+colnames(planet_matrix) <- c("Temp", "Energy", "Growth")
+
+planet_matrix
+rowMeans(planet_matrix)
+colMeans(planet_matrix)
+```
+
+## 1.4 List
+
+```{r}
+planet_list <- list(
+  population = population,
+  temperature = temperature,
+  size = size_km,
+  rating = rating,
+  moons = num_moons,
+  matrix = planet_matrix,
+  vectors = list(num_vector, seq_vector, logic_vector),
+  description = "Aurelia — a warm, water-rich terrestrial planet in the Andromeda galaxy."
+)
+
+planet_list
+```
+
+## 1.5 Factor
+
+```{r}
+civ_levels <- factor(c("low", "medium", "high", "medium", "high"))
+table(civ_levels)
+```
+
+## 1.6 Data Frame
+
+```{r}
+cities_df <- data.frame(
+  name = c("Aqua", "Lumin", "Orion", "Zephyr", "Terra"),
+  population = c(120, 90, 300, 50, 200),
+  is_coastal = c(TRUE, FALSE, TRUE, FALSE, TRUE),
+  category = c("large", "medium", "mega", "small", "large")
+)
+
+colnames(cities_df) <- c("City", "Population", "Coastal", "Category")
+
+str(cities_df)
+summary(cities_df)
+
+cities_df$Pop_million <- cities_df$Population / 100
+cities_df
+```
