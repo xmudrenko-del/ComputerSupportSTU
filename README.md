@@ -1,2 +1,2 @@
 # ComputerSupportSTU
-Практические задания по предмету Computer Support (STU, 2025). 
+Practical assignments for the subject Computer Support (STU, 2025). 
